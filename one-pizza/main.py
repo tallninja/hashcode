@@ -8,7 +8,7 @@
 
 data = []
 
-with open('a_an_example.in.txt', 'r') as input_file:
+with open('e_elaborate.in.txt', 'r') as input_file:
     data = input_file.read().strip().split('\n')
 
 number_of_potential_clients = int(data[0])
@@ -20,7 +20,7 @@ likes = []
 dislikes = []
 ingredients = set()
 
-for i in range(0, len(clients_preferences) - 1, 2):
+for i in range(0, len(clients_preferences), 2):
     likes.extend(clients_preferences[i].split(' ')[1:])
     dislikes.extend(clients_preferences[i + 1].split(' ')[1:])
 
