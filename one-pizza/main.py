@@ -6,31 +6,37 @@
 # Each client will come to your pizzeria if both conditions are true:
 
 
-data = []
+def get_final_ingredients(data):
+    likes = []
+    dislikes = []
+    ingredients = set()
+    number_of_potential_clients = int(data[0])
+    clients_preferences = data[1:]
+    assert number_of_potential_clients * 2 == len(clients_preferences)
+    for i in range(0, len(clients_preferences), 2):
+        likes.extend(clients_preferences[i].split(' ')[1:])
+        dislikes.extend(clients_preferences[i + 1].split(' ')[1:])
 
-with open('e_elaborate.in.txt', 'r') as input_file:
-    data = input_file.read().strip().split('\n')
+    for like in likes:
+        if like not in dislikes:
+            ingredients.add(like)
 
-number_of_potential_clients = int(data[0])
-clients_preferences = data[1:]
+    output = f'{len(ingredients)}'
 
-assert number_of_potential_clients * 2 == len(clients_preferences)
+    for ingredient in ingredients:
+        output += f' {ingredient}'
 
-likes = []
-dislikes = []
-ingredients = set()
+    return output
 
-for i in range(0, len(clients_preferences), 2):
-    likes.extend(clients_preferences[i].split(' ')[1:])
-    dislikes.extend(clients_preferences[i + 1].split(' ')[1:])
+def main():
+    data = []
+    
+    with open('e_elaborate.in.txt', 'r') as input_file:
+        data = input_file.read().strip().split('\n')
 
-for like in likes:
-    if like not in dislikes:
-        ingredients.add(like)
+    final_ingredients = get_final_ingredients(data)
+    print(final_ingredients)
+    
 
-output = f'{len(ingredients)}'
-
-for ingredient in ingredients:
-    output += f' {ingredient}'
-
-print(output)
+if __name__ == '__main__':
+    main()
